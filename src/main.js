@@ -1,19 +1,23 @@
 import './style.css'
 import * as d3 from 'd3' 
   
+var windowWidth = window.innerWidth;
+window.addEventListener("resize", () => {
+  windowWidth = window.innerWidth;
+})
   //THIRD SVG
   const svg3 = d3.create("svg")
-  .attr("width", 1040)
-  .attr("height", 1000);
+  .attr("width", 2000)
+  .attr("height", 2000);
   
   // Declare the x (horizontal position) scale.
   const x = d3.scaleLinear()
     .domain([0, 1000])
-    .range([0, 1000]);
+    .range([0, 1800]);
 
   // Declare the y (vertical position) scale.
   const y = d3.scaleLinear()
-    .domain([0, 1000])
+    .domain([-50, 1000])
     .range([0, 1000]);
 
 
@@ -30,21 +34,33 @@ import * as d3 from 'd3'
       { X: 0, Y: 417.9 },
       { X: 432, Y: 417.9 },
       { X: 475.7, Y: 457 },
-      { X: 531, Y: 607 },
-      { X: 568.3, Y: 646.1 },
-      { X: 865.7, Y: 646.1 }
+      { X: 531, Y: 575.5 },
+      { X: 568.3, Y: 604.95 },
+      { X: 865.7, Y: 604.95 }
     ],
     [
       { X: 0, Y: 417.9 },
       { X: 432, Y: 417.9 },
+      { X: 475.7, Y: 417.9 },
+      { X: 531, Y: 417.9 },
+      { X: 568.3, Y: 417.9 },
+      { X: 865.7, Y: 417.9 }
     ],
     [
       { X: 0, Y: 417.9 },
       { X: 432, Y: 417.9 },
+      { X: 475.6, Y: 382 },
+      { X: 531.1, Y: 268.35 },
+      { X: 567.1, Y: 239.9 },
+      { X: 865.7, Y: 239.9}
     ],
     [
       { X: 0, Y: 417.9 },
       { X: 432, Y: 417.9 },
+      { X: 474.7, Y: 360.9 },
+      { X: 532, Y: 118.8 },
+      { X: 574.6, Y: 61.9},
+      { X: 865.7, Y: 61.9}
     ]
   ];
 
@@ -59,7 +75,7 @@ import * as d3 from 'd3'
     .attr("stroke", "rgb(0,156,222)")
     .attr("stroke-opacity", 0.6)
     .attr("fill", "none")
-    .attr("stroke-width", 120);
+    .attr("stroke-width", 150);
   }
 
 
