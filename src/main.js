@@ -422,16 +422,23 @@ var RST = [
 
 //For loop that renders the rectangles
 for (var i = 0; i<5; i++) {
-  for (var a = 0; a<50; a++) {
+  for (var a = 0; a<GRA.length; a++) {
     pathArray[i][0].Y = Math.random() * (340-260) + 260;
-    sankeySVG.append("rect")
-    .attr("width", 3)
-    .attr("height", 3)
-    .attr("fill", "red")
-    .append("animateMotion")
-    .attr("dur", "10s")
-    .attr("repeatCount", "indefinite")
-    .attr("path", sankey(pathArray[i]))
+    pathArray[i][0].X = Math.random() * (0-260) + 260;
+
+    if (GRA[a].region === "AFR") {
+      console.log("yes")
+      
+      sankeySVG.append("rect")
+        .attr("width", 3)
+        .attr("height", 3)
+        .attr("fill", "red")
+        .append("animateMotion")
+        .attr("dur", "10s")
+        .attr("repeatCount", "indefinite")
+        .attr("path", sankey(pathArray[1]))
+    }
+
 
     // setInterval()
   }
