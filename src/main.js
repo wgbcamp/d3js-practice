@@ -26,7 +26,7 @@ const pathArray = [
   [
     { X: 0, Y: 300.89 },
     { X: 432, Y: 300.89 },
-    { X: 474.4, Y: 303.3 },
+    { X: 474.4, Y: 313.3 },
     { X: 532.2, Y: 487.83 },
     { X: 575.3, Y: 530.24 },
     { X: 865.7, Y: 530.24 }
@@ -292,7 +292,7 @@ sankeySVG.append("path")
 
 //Test variables
 var GRA = [
-  { region: "AFR", decade: 1950, amount: 25 },
+  { region: "AFR", decade: 1950, amount: 35 },
   { region: "AFR", decade: 1960, amount: 285.1 },
   { region: "AFR", decade: 1970, amount: 1289.248855 },
   { region: "AFR", decade: 1980, amount: 10584.88 },
@@ -420,31 +420,69 @@ var RST = [
   { region: "WHD", decade: 2020, amount: 1270.2 },
 ]
 
-//For loop that renders the rectangles
-for (var i = 0; i<5; i++) {
-  for (var a = 0; a<GRA.length; a++) {
-    pathArray[i][0].Y = Math.random() * (340-260) + 260;
-    pathArray[i][0].X = Math.random() * (0-260) + 260;
+var afr = pathArray[1][5];
+var whd;
+var mcd;
+var eur;
+var apd;
 
-    if (GRA[a].region === "AFR") {
-      console.log("yes")
-      
-      sankeySVG.append("rect")
-        .attr("width", 3)
-        .attr("height", 3)
-        .attr("fill", "red")
-        .append("animateMotion")
-        .attr("dur", "10s")
-        .attr("repeatCount", "indefinite")
-        .attr("path", sankey(pathArray[1]))
+//For loop that renders the rectangles
+
+afr.X = 860
+
+  for (var a = 0; a<GRA.length; a++) {
+    //with every loop, shift the starting X value over into the next decade
+
+
+    if (a == 1) {
+      afr.X = pathArray[1][5].X - 3;
+    } 
+    if (a > 1) {
+      afr.X = pathArray[1][5].X - (30);
+    } 
+    if (a > 2) {
+      afr.X = pathArray[1][5].X + (23);
     }
 
+    //check if object has AFR as its region
+    if (GRA[a].region === "AFR") {  
 
-    // setInterval()
+
+      if (GRA[a].decade === 1950 || GRA[a].decade === 1960 || GRA[a].decade === 1970 ||
+         GRA[a].decade === 1980 || GRA[a].decade === 1990) {
+
+        //this value affects the y value of the end point
+        afr.Y = 456;
+
+        for (var c = 0; c<Math.floor(GRA[a].amount); c++) {
+          //these values add randomness to the spawn point
+          pathArray[1][0].Y = Math.random() * (340-260) + 260;
+          pathArray[1][0].X = Math.random() * (0-260) + 260;
+
+          //if the value in the loop has a remainder of 0, place the pixels on a new line
+          if (c % 35 == 0 && c !== 0) {
+            afr.Y = afr.Y - 1;
+            afr.X = afr.X + 35;
+          }
+          //this value positions the end point with every pixel placed
+          afr.X = afr.X - 1;
+          sankeySVG.append("rect")
+            .attr("width", 1)
+            .attr("height", 1)
+            .attr("fill", "rgb(231, 172, 59)")
+            .append("animateMotion")
+              .attr("dur", "15s")
+              .attr("repeatCount", "1")
+              .attr("fill", "freeze")
+              .attr("path", sankey(pathArray[1]))
+        }
+
+      }
+    }
+
   }
 
 
-}
 
 
 // Return SVG elements.
