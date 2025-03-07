@@ -100,15 +100,6 @@ sankeySVG.append("path")
   .attr("stroke", "rgb(91, 182, 217)")
   .attr("fill", "none");
 
-//Test
-sankeySVG.append("circle")
-  .attr("r", 15)
-  .attr("fill", "red")
-  .append("animateMotion")
-  .attr("dur", "10s")
-  .attr("repeatCount", "indefinite")
-  .attr("path", sankey(pathArray[0]))
-
 //Text for sankey branches
 sankeySVG.append("text")
   .attr("x", 50)
@@ -296,6 +287,157 @@ sankeySVG.append("path")
   .attr("stroke", "rgb(43, 101, 169)")
   .attr("stroke-dasharray", "5,6")
   .attr("fill", "none");
+
+//Test
+
+//Test variables
+var GRA = [
+  { region: "AFR", decade: 1950, amount: 25 },
+  { region: "AFR", decade: 1960, amount: 285.1 },
+  { region: "AFR", decade: 1970, amount: 1289.248855 },
+  { region: "AFR", decade: 1980, amount: 10584.88 },
+  { region: "AFR", decade: 1990, amount: 1675.816 },
+  { region: "AFR", decade: 2000, amount: 2267.178309 },
+  { region: "AFR", decade: 2010, amount: 5649.1604 },
+  { region: "AFR", decade: 2020, amount: 12578.1684 },
+  { region: "APD", decade: 1950, amount: 72.5 },
+  { region: "APD", decade: 1960, amount: 1876.1 },
+  { region: "APD", decade: 1970, amount: 1665.215 },
+  { region: "APD", decade: 1980, amount: 13022.9 },
+  { region: "APD", decade: 1990, amount: 34666.455 },
+  { region: "APD", decade: 2000, amount: 5924.04 },
+  { region: "APD", decade: 2010, amount: 1385.2854 },
+  { region: "APD", decade: 2020, amount: 5174.09 },
+  { region: "EUR", decade: 1950, amount: 2708.09 },
+  { region: "EUR", decade: 1960, amount: 7248.125 },
+  { region: "EUR", decade: 1970, amount: 6741.3125 },
+  { region: "EUR", decade: 1980, amount: 4421.35 },
+  { region: "EUR", decade: 1990, amount: 32130.92 },
+  { region: "EUR", decade: 2000, amount: 74995.9115 },
+  { region: "EUR", decade: 2010, amount: 216102.026 },
+  { region: "EUR", decade: 2020, amount: 20634.262 },
+  { region: "MCD", decade: 1950, amount: 67.5 },
+  { region: "MCD", decade: 1960, amount: 620.01 },
+  { region: "MCD", decade: 1970, amount: 1407.69 },
+  { region: "MCD", decade: 1980, amount: 6802.48 },
+  { region: "MCD", decade: 1990, amount: 6660.55 },
+  { region: "MCD", decade: 2000, amount: 7514.6 },
+  { region: "MCD", decade: 2010, amount: 41373.955 },
+  { region: "MCD", decade: 2020, amount: 17629.37778 },
+  { region: "WHD", decade: 1950, amount: 621.85 },
+  { region: "WHD", decade: 1960, amount: 4047.2 },
+  { region: "WHD", decade: 1970, amount: 3203.606 },
+  { region: "WHD", decade: 1980, amount: 27831.825 },
+  { region: "WHD", decade: 1990, amount: 35068.215 },
+  { region: "WHD", decade: 2000, amount: 98779.137 },
+  { region: "WHD", decade: 2010, amount: 415501.85 },
+  { region: "WHD", decade: 2020, amount: 141207.22 },
+];
+
+var PRGT = [
+  { region: "AFR", decade: 1950, amount: 0 },
+  { region: "AFR", decade: 1960, amount: 0 },
+  { region: "AFR", decade: 1970, amount: 0 },
+  { region: "AFR", decade: 1980, amount: 2014.712 },
+  { region: "AFR", decade: 1990, amount: 5059.64654 },
+  { region: "AFR", decade: 2000, amount: 5149.1245 },
+  { region: "AFR", decade: 2010, amount: 5649.1604 },
+  { region: "AFR", decade: 2020, amount: 15151.3062 },
+  { region: "APD", decade: 1950, amount: 0 },
+  { region: "APD", decade: 1960, amount: 0 },
+  { region: "APD", decade: 1970, amount: 0 },
+  { region: "APD", decade: 1980, amount: 320.989 },
+  { region: "APD", decade: 1990, amount: 1242.61 },
+  { region: "APD", decade: 2000, amount: 5924.04 },
+  { region: "APD", decade: 2010, amount: 708.63 },
+  { region: "APD", decade: 2020, amount: 2161.61 },
+  { region: "EUR", decade: 1950, amount: 0 },
+  { region: "EUR", decade: 1960, amount: 0 },
+  { region: "EUR", decade: 1970, amount: 0 },
+  { region: "EUR", decade: 1980, amount: 0 },
+  { region: "EUR", decade: 1990, amount: 132.22 },
+  { region: "EUR", decade: 2000, amount: 237.8175 },
+  { region: "EUR", decade: 2010, amount: 227.9 },
+  { region: "EUR", decade: 2020, amount: 190.8 },
+  { region: "MCD", decade: 1950, amount: 0 },
+  { region: "MCD", decade: 1960, amount: 0 },
+  { region: "MCD", decade: 1970, amount: 0 },
+  { region: "MCD", decade: 1980, amount: 434.457 },
+  { region: "MCD", decade: 1990, amount: 2284.752 },
+  { region: "MCD", decade: 2000, amount: 1829.79 },
+  { region: "MCD", decade: 2010, amount: 1371.805 },
+  { region: "MCD", decade: 2020, amount: 2846.253 },
+  { region: "WHD", decade: 1950, amount: 0 },
+  { region: "WHD", decade: 1960, amount: 0 },
+  { region: "WHD", decade: 1970, amount: 0 },
+  { region: "WHD", decade: 1980, amount: 201.286 },
+  { region: "WHD", decade: 1990, amount: 900.4694 },
+  { region: "WHD", decade: 2000, amount: 386.678 },
+  { region: "WHD", decade: 2010, amount: 346.6275 },
+  { region: "WHD", decade: 2020, amount: 483.28245 },
+]
+
+var RST = [
+  { region: "AFR", decade: 1950, amount: 0 },
+  { region: "AFR", decade: 1960, amount: 0 },
+  { region: "AFR", decade: 1970, amount: 0 },
+  { region: "AFR", decade: 1980, amount: 0 },
+  { region: "AFR", decade: 1990, amount: 0 },
+  { region: "AFR", decade: 2000, amount: 0 },
+  { region: "AFR", decade: 2010, amount: 0 },
+  { region: "AFR", decade: 2020, amount: 1023.15 },
+  { region: "APD", decade: 1950, amount: 0 },
+  { region: "APD", decade: 1960, amount: 0 },
+  { region: "APD", decade: 1970, amount: 0 },
+  { region: "APD", decade: 1980, amount: 0 },
+  { region: "APD", decade: 1990, amount: 0 },
+  { region: "APD", decade: 2000, amount: 0 },
+  { region: "APD", decade: 2010, amount: 0 },
+  { region: "APD", decade: 2020, amount: 1000 },
+  { region: "EUR", decade: 1950, amount: 0 },
+  { region: "EUR", decade: 1960, amount: 0 },
+  { region: "EUR", decade: 1970, amount: 0 },
+  { region: "EUR", decade: 1980, amount: 0 },
+  { region: "EUR", decade: 1990, amount: 0 },
+  { region: "EUR", decade: 2000, amount: 0 },
+  { region: "EUR", decade: 2010, amount: 0 },
+  { region: "EUR", decade: 2020, amount: 61.95 },
+  { region: "MCD", decade: 1950, amount: 0 },
+  { region: "MCD", decade: 1960, amount: 0 },
+  { region: "MCD", decade: 1970, amount: 0 },
+  { region: "MCD", decade: 1980, amount: 0 },
+  { region: "MCD", decade: 1990, amount: 0 },
+  { region: "MCD", decade: 2000, amount: 0 },
+  { region: "MCD", decade: 2010, amount: 0 },
+  { region: "MCD", decade: 2020, amount: 1000 },
+  { region: "WHD", decade: 1950, amount: 0 },
+  { region: "WHD", decade: 1960, amount: 0 },
+  { region: "WHD", decade: 1970, amount: 0 },
+  { region: "WHD", decade: 1980, amount: 0 },
+  { region: "WHD", decade: 1990, amount: 0 },
+  { region: "WHD", decade: 2000, amount: 0 },
+  { region: "WHD", decade: 2010, amount: 0 },
+  { region: "WHD", decade: 2020, amount: 1270.2 },
+]
+
+//For loop that renders the rectangles
+for (var i = 0; i<5; i++) {
+  for (var a = 0; a<50; a++) {
+    pathArray[i][0].Y = Math.random() * (340-260) + 260;
+    sankeySVG.append("rect")
+    .attr("width", 3)
+    .attr("height", 3)
+    .attr("fill", "red")
+    .append("animateMotion")
+    .attr("dur", "10s")
+    .attr("repeatCount", "indefinite")
+    .attr("path", sankey(pathArray[i]))
+
+    // setInterval()
+  }
+
+
+}
 
 
 // Return SVG elements.
