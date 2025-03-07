@@ -435,13 +435,21 @@ afr.X = 860
 
 
     if (a == 1) {
-      afr.X = pathArray[1][5].X - 3;
+      afr.X = pathArray[1][5].X - 2;
     } 
     if (a > 1) {
-      afr.X = pathArray[1][5].X - (30);
+      afr.X = pathArray[1][5].X - (32);
     } 
     if (a > 2) {
-      afr.X = pathArray[1][5].X + (23);
+      afr.X = pathArray[1][5].X + (25);
+    }
+
+    if (a > 3) {
+      afr.X = pathArray[1][5].X - (16);
+    }
+
+    if (a > 4) {
+      afr.X = pathArray[1][5].X + (18);
     }
 
     //check if object has AFR as its region
@@ -449,7 +457,8 @@ afr.X = 860
 
 
       if (GRA[a].decade === 1950 || GRA[a].decade === 1960 || GRA[a].decade === 1970 ||
-         GRA[a].decade === 1980 || GRA[a].decade === 1990) {
+         GRA[a].decade === 1980 || GRA[a].decade === 1990 || GRA[a].decade === 2000
+        ) {
 
         //this value affects the y value of the end point
         afr.Y = 456;
@@ -458,6 +467,10 @@ afr.X = 860
           //these values add randomness to the spawn point
           pathArray[1][0].Y = Math.random() * (340-260) + 260;
           pathArray[1][0].X = Math.random() * (0-260) + 260;
+
+          pathArray[1][1].Y = Math.random() * (340-260) + 260;
+          pathArray[1][2].Y = Math.random() * (340-260) + 260;
+          pathArray[1][3].Y = Math.random() * (340-260) + 260;
 
           //if the value in the loop has a remainder of 0, place the pixels on a new line
           if (c % 35 == 0 && c !== 0) {
